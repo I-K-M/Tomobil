@@ -3,6 +3,14 @@ const currentPath = Astro.url.pathname;
 
 const navItems = [
   { label: 'Home', path: '/' },
+  {
+    label: 'Fleet',
+    path: '/fleet/vehicles',
+    submenu: [
+      { label: 'Our Vehicles', path: '/fleet/vehicles' },
+      { label: 'Maintenance', path: '/fleet/maintenance' }
+    ]
+  },
   { label: 'Services', path: '/services' },
   { label: 'About', path: '/about' },
   { label: 'Blog', path: '/blog' },
@@ -19,15 +27,47 @@ const navItems = [
       <!-- Navigation Links -->
       <ul class="hidden md:flex space-x-8">
         {navItems.map((item) => (
-          <li>
+          <li class="relative group">
             <a
               href={item.path}
               class={`text-gray-600 hover:text-blue-600 transition-colors ${
                 currentPath === item.path ? 'text-blue-600 font-semibold' : ''
-              }`}
+              } ${item.submenu ? 'pr-5' : ''}`}
             >
               {item.label}
+              {item.submenu && (
+                <svg
+                  class="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 transition-transform group-hover:rotate-180"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              )}
             </a>
+            {item.submenu && (
+              <ul class="absolute left-0 mt-0 w-48 bg-white shadow-lg rounded-md py-2 opacity-0 invisible transform -translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-2 transition-all duration-300 ease-in-out">
+                <div class="absolute -top-2 left-0 w-full h-2"></div>
+                {item.submenu.map((subitem) => (
+                  <li>
+                    <a
+                      href={subitem.path}
+                      class={`block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-gray-50 ${
+                        currentPath === subitem.path ? 'text-blue-600 font-semibold' : ''
+                      }`}
+                    >
+                      {subitem.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
         ))}
       </ul>
@@ -81,15 +121,53 @@ const navItems = [
           </div>
           <ul class="space-y-4">
             {navItems.map((item) => (
-              <li>
-                <a
-                  href={item.path}
-                  class={`block text-gray-600 hover:text-blue-600 transition-colors ${
-                    currentPath === item.path ? 'text-blue-600 font-semibold' : ''
-                  }`}
-                >
-                  {item.label}
-                </a>
+              <li class="space-y-2">
+                <div class="flex justify-between items-center">
+                  <a
+                    href={item.path}
+                    class={`block text-gray-600 hover:text-blue-600 transition-colors ${
+                      currentPath === item.path ? 'text-blue-600 font-semibold' : ''
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                  {item.submenu && (
+                    <button
+                      class="text-gray-600 hover:text-blue-600 focus:outline-none p-1"
+                      onclick={`this.closest('li').querySelector('.submenu').classList.toggle('hidden')`}
+                    >
+                      <svg
+                        class="w-4 h-4 transform transition-transform"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                  )}
+                </div>
+                {item.submenu && (
+                  <ul class="submenu hidden pl-4 space-y-2">
+                    {item.submenu.map((subitem) => (
+                      <li>
+                        <a
+                          href={subitem.path}
+                          class={`block text-gray-600 hover:text-blue-600 transition-colors ${
+                            currentPath === subitem.path ? 'text-blue-600 font-semibold' : ''
+                          }`}
+                        >
+                          {subitem.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>

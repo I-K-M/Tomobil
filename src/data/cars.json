@@ -1,0 +1,154 @@
+{
+  "cars": [
+    {
+      "id": "1",
+      "name": "Tesla Model 3",
+      "type": "Electric Sedan",
+      "seats": 5,
+      "transmission": "Automatic",
+      "price": 150,
+      "image": "/images/cars/tesla-model-3.jpg",
+      "features": ["Autopilot", "360° Cameras", "Premium Sound System"],
+      "specifications": {
+        "range": "358 miles",
+        "acceleration": "3.1s 0-60mph",
+        "topSpeed": "162 mph"
+      }
+    },
+    {
+      "id": "2",
+      "name": "BMW X5",
+      "type": "Luxury SUV",
+      "seats": 7,
+      "transmission": "Automatic",
+      "price": 200,
+      "image": "/images/cars/bmw-x5.jpg",
+      "features": ["Panoramic Roof", "Leather Seats", "Navigation"],
+      "specifications": {
+        "engine": "3.0L 6-cylinder",
+        "power": "335 hp",
+        "torque": "330 lb-ft"
+      }
+    },
+    {
+      "id": "3",
+      "name": "Toyota Camry",
+      "type": "Midsize Sedan",
+      "seats": 5,
+      "transmission": "Automatic",
+      "price": 80,
+      "image": "/images/cars/toyota-camry.jpg",
+      "features": ["Bluetooth", "Backup Camera", "Smart Key System"],
+      "specifications": {
+        "engine": "2.5L 4-cylinder",
+        "power": "203 hp",
+        "fuelEconomy": "28/39 mpg"
+      }
+    },
+    {
+      "id": "4",
+      "name": "Mercedes-Benz S-Class",
+      "type": "Luxury Sedan",
+      "seats": 5,
+      "transmission": "Automatic",
+      "price": 300,
+      "image": "/images/cars/mercedes-s-class.jpg",
+      "features": ["Massage Seats", "Air Suspension", "Night Vision"],
+      "specifications": {
+        "engine": "3.0L 6-cylinder",
+        "power": "429 hp",
+        "acceleration": "4.9s 0-60mph"
+      }
+    },
+    {
+      "id": "5",
+      "name": "Porsche 911",
+      "type": "Sports Car",
+      "seats": 4,
+      "transmission": "Automatic",
+      "price": 400,
+      "image": "/images/cars/porsche-911.jpg",
+      "features": ["Sport Chrono", "Active Suspension", "Sport Exhaust"],
+      "specifications": {
+        "engine": "3.0L Twin-Turbo",
+        "power": "379 hp",
+        "acceleration": "4.0s 0-60mph"
+      }
+    },
+    {
+      "id": "6",
+      "name": "Range Rover Sport",
+      "type": "Luxury SUV",
+      "seats": 5,
+      "transmission": "Automatic",
+      "price": 250,
+      "image": "/images/cars/range-rover-sport.jpg",
+      "features": ["Off-Road Package", "Premium Audio", "Heated Seats"],
+      "specifications": {
+        "engine": "3.0L 6-cylinder",
+        "power": "355 hp",
+        "groundClearance": "10.9 inches"
+      }
+    },
+    {
+      "id": "7",
+      "name": "Audi A4",
+      "type": "Compact Luxury",
+      "seats": 5,
+      "transmission": "Automatic",
+      "price": 120,
+      "image": "/images/cars/audi-a4.jpg",
+      "features": ["Quattro AWD", "Virtual Cockpit", "LED Lights"],
+      "specifications": {
+        "engine": "2.0L 4-cylinder",
+        "power": "261 hp",
+        "torque": "273 lb-ft"
+      }
+    },
+    {
+      "id": "8",
+      "name": "Honda CR-V",
+      "type": "Compact SUV",
+      "seats": 5,
+      "transmission": "Automatic",
+      "price": 90,
+      "image": "/images/cars/honda-crv.jpg",
+      "features": ["Honda Sensing", "Apple CarPlay", "Android Auto"],
+      "specifications": {
+        "engine": "1.5L Turbo",
+        "power": "190 hp",
+        "fuelEconomy": "28/34 mpg"
+      }
+    },
+    {
+      "id": "9",
+      "name": "Lexus ES",
+      "type": "Luxury Sedan",
+      "seats": 5,
+      "transmission": "Automatic",
+      "price": 160,
+      "image": "/images/cars/lexus-es.jpg",
+      "features": ["Safety System+", "Mark Levinson Audio", "Sunroof"],
+      "specifications": {
+        "engine": "2.5L 4-cylinder",
+        "power": "203 hp",
+        "fuelEconomy": "25/34 mpg"
+      }
+    },
+    {
+      "id": "10",
+      "name": "Volkswagen Golf GTI",
+      "type": "Hot Hatch",
+      "seats": 5,
+      "transmission": "Manual",
+      "price": 110,
+      "image": "/images/cars/vw-gti.jpg",
+      "features": ["Sport Mode", "Plaid Seats", "Dynamic Chassis Control"],
+      "specifications": {
+        "engine": "2.0L Turbo",
+        "power": "241 hp",
+        "torque": "273 lb-ft"
+      }
+    }
+  ]
+}

@@ -1,31 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import BookingModal from '../../components/BookingModal.astro';
+import CarImage from '../../components/CarImage.astro';
+import carsData from '../../data/cars.json';
 
-const vehicles = [
-  {
-    id: 1,
-    name: 'Mercedes-Benz E-Class',
-    category: 'Luxury Sedan',
-    passengers: 5,
-    transmission: 'Automatic',
-    fuelType: 'Hybrid',
-    dailyRate: 150,
-    image: '/images/mercedes-e-class.jpg',
-    features: ['Leather Seats', 'GPS Navigation', 'Bluetooth', 'Parking Sensors']
-  },
-  {
-    id: 2,
-    name: 'BMW X5',
-    category: 'Luxury SUV',
-    passengers: 7,
-    transmission: 'Automatic',
-    fuelType: 'Diesel',
-    dailyRate: 180,
-    image: '/images/bmw-x5.jpg',
-    features: ['Panoramic Roof', '360° Camera', 'Heated Seats', 'Apple CarPlay']
-  },
-  // Add more vehicles as needed
-];
+const { cars } = carsData;
 ---
 
 <Layout title="Our Fleet - Tomobil Car Hire">
@@ -41,71 +20,114 @@ const vehicles = [
 
       <!-- Filters -->
       <div class="mb-8 flex flex-wrap gap-4 justify-center">
-        <select class="px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-          <option value="">All Categories</option>
-          <option value="luxury-sedan">Luxury Sedan</option>
-          <option value="luxury-suv">Luxury SUV</option>
-          <option value="sports-car">Sports Car</option>
-          <option value="van">Van</option>
+        <select id="type-filter" class="px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+          <option value="">All Types</option>
+          <option value="Luxury Sedan">Luxury Sedan</option>
+          <option value="Luxury SUV">Luxury SUV</option>
+          <option value="Sports Car">Sports Car</option>
+          <option value="Electric Sedan">Electric Sedan</option>
+          <option value="Hot Hatch">Hot Hatch</option>
+          <option value="Compact SUV">Compact SUV</option>
         </select>
-        <select class="px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+        <select id="transmission-filter" class="px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
           <option value="">All Transmissions</option>
-          <option value="automatic">Automatic</option>
-          <option value="manual">Manual</option>
+          <option value="Automatic">Automatic</option>
+          <option value="Manual">Manual</option>
         </select>
-        <select class="px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-          <option value="">Passengers</option>
-          <option value="2">2 Seats</option>
+        <select id="seats-filter" class="px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+          <option value="">All Seats</option>
+          <option value="4">4 Seats</option>
           <option value="5">5 Seats</option>
           <option value="7">7 Seats</option>
-          <option value="9">9+ Seats</option>
         </select>
       </div>
 
       <!-- Vehicle Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {vehicles.map(vehicle => (
-          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="cars-grid">
+        {cars.map((car) => (
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden" data-type={car.type} data-transmission={car.transmission} data-seats={car.seats}>
             <div class="aspect-w-16 aspect-h-9">
-              <img
-                src={vehicle.image}
-                alt={vehicle.name}
-                class="w-full h-full object-cover"
-              />
+              {car.image.startsWith('/') ? (
+                <CarImage name={car.name} />
+              ) : (
+                <img
+                  src={car.image}
+                  alt={car.name}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              )}
             </div>
             <div class="p-6">
-              <h3 class="text-xl font-bold mb-2">{vehicle.name}</h3>
-              <p class="text-gray-600 mb-4">{vehicle.category}</p>
+              <h3 class="text-xl font-bold mb-2">{car.name}</h3>
+              <p class="text-gray-600 mb-4">{car.type}</p>
               <div class="grid grid-cols-2 gap-4 mb-4">
                 <div class="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
-                  </svg>
-                  <span>{vehicle.passengers} Passengers</span>
+                  <span class="material-icons text-gray-500 mr-2">people</span>
+                  <span>{car.seats} Seats</span>
                 </div>
                 <div class="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
-                  </svg>
-                  <span>{vehicle.transmission}</span>
+                  <span class="material-icons text-gray-500 mr-2">settings</span>
+                  <span>{car.transmission}</span>
                 </div>
+              </div>
+              <div class="mb-4">
+                <h4 class="font-semibold mb-2">Features:</h4>
+                <ul class="list-disc list-inside text-gray-600">
+                  {car.features.slice(0, 3).map((feature) => (
+                    <li>{feature}</li>
+                  ))}
+                </ul>
               </div>
               <div class="border-t pt-4">
                 <div class="flex justify-between items-center mb-4">
                   <div class="text-gray-600">Daily Rate</div>
-                  <div class="text-2xl font-bold">£{vehicle.dailyRate}</div>
+                  <div class="text-2xl font-bold">€{car.price}</div>
                 </div>
-                <a
-                  href={`/fleet/book/${vehicle.id}`}
-                  class="block w-full bg-blue-600 text-white text-center py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+                <button
+                  onclick={`document.getElementById('booking-modal-${car.id}').classList.remove('hidden'); document.getElementById('booking-modal-${car.id}').classList.add('flex');`}
+                  class="w-full bg-blue-600 text-white text-center py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
                 >
                   Book Now
-                </a>
+                </button>
               </div>
             </div>
           </div>
         ))}
       </div>
+
+      {cars.map((car) => (
+        <BookingModal id={car.id} name={car.name} />
+      ))}
     </div>
   </main>
 </Layout>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<script>
+  function updateFilters() {
+    const typeFilter = (document.getElementById('type-filter') as HTMLSelectElement)?.value || '';
+    const transmissionFilter = (document.getElementById('transmission-filter') as HTMLSelectElement)?.value || '';
+    const seatsFilter = (document.getElementById('seats-filter') as HTMLSelectElement)?.value || '';
+
+    const cars = document.querySelectorAll<HTMLElement>('#cars-grid > div');
+
+    cars.forEach(car => {
+      const matchesType = !typeFilter || car.dataset.type === typeFilter;
+      const matchesTransmission = !transmissionFilter || car.dataset.transmission === transmissionFilter;
+      const matchesSeats = !seatsFilter || car.dataset.seats === seatsFilter;
+
+      car.style.display = matchesType && matchesTransmission && matchesSeats ? 'block' : 'none';
+    });
+  }
+
+  // Add event listeners to filters
+  const typeFilterEl = document.getElementById('type-filter');
+  const transmissionFilterEl = document.getElementById('transmission-filter');
+  const seatsFilterEl = document.getElementById('seats-filter');
+
+  typeFilterEl?.addEventListener('change', updateFilters);
+  transmissionFilterEl?.addEventListener('change', updateFilters);
+  seatsFilterEl?.addEventListener('change', updateFilters);
+</script>

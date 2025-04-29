@@ -1,0 +1,17 @@
+---
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+
+// Create a placeholder with the car name
+const placeholderUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&size=400&background=e5e7eb&color=4b5563&format=svg`;
+---
+
+<img
+  src={placeholderUrl}
+  alt={name}
+  class="w-full h-full object-cover"
+  loading="lazy"
+/>
