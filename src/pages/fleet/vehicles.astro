@@ -1,0 +1,111 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const vehicles = [
+  {
+    id: 1,
+    name: 'Mercedes-Benz E-Class',
+    category: 'Luxury Sedan',
+    passengers: 5,
+    transmission: 'Automatic',
+    fuelType: 'Hybrid',
+    dailyRate: 150,
+    image: '/images/mercedes-e-class.jpg',
+    features: ['Leather Seats', 'GPS Navigation', 'Bluetooth', 'Parking Sensors']
+  },
+  {
+    id: 2,
+    name: 'BMW X5',
+    category: 'Luxury SUV',
+    passengers: 7,
+    transmission: 'Automatic',
+    fuelType: 'Diesel',
+    dailyRate: 180,
+    image: '/images/bmw-x5.jpg',
+    features: ['Panoramic Roof', '360° Camera', 'Heated Seats', 'Apple CarPlay']
+  },
+  // Add more vehicles as needed
+];
+---
+
+<Layout title="Our Fleet - Tomobil Car Hire">
+  <main class="min-h-screen py-12">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold mb-4">Our Fleet</h1>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          Discover our extensive range of premium vehicles available for hire. From luxury sedans to spacious SUVs,
+          we have the perfect vehicle for every occasion.
+        </p>
+      </div>
+
+      <!-- Filters -->
+      <div class="mb-8 flex flex-wrap gap-4 justify-center">
+        <select class="px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+          <option value="">All Categories</option>
+          <option value="luxury-sedan">Luxury Sedan</option>
+          <option value="luxury-suv">Luxury SUV</option>
+          <option value="sports-car">Sports Car</option>
+          <option value="van">Van</option>
+        </select>
+        <select class="px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+          <option value="">All Transmissions</option>
+          <option value="automatic">Automatic</option>
+          <option value="manual">Manual</option>
+        </select>
+        <select class="px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+          <option value="">Passengers</option>
+          <option value="2">2 Seats</option>
+          <option value="5">5 Seats</option>
+          <option value="7">7 Seats</option>
+          <option value="9">9+ Seats</option>
+        </select>
+      </div>
+
+      <!-- Vehicle Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {vehicles.map(vehicle => (
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="aspect-w-16 aspect-h-9">
+              <img
+                src={vehicle.image}
+                alt={vehicle.name}
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">{vehicle.name}</h3>
+              <p class="text-gray-600 mb-4">{vehicle.category}</p>
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                <div class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                  </svg>
+                  <span>{vehicle.passengers} Passengers</span>
+                </div>
+                <div class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+                  </svg>
+                  <span>{vehicle.transmission}</span>
+                </div>
+              </div>
+              <div class="border-t pt-4">
+                <div class="flex justify-between items-center mb-4">
+                  <div class="text-gray-600">Daily Rate</div>
+                  <div class="text-2xl font-bold">£{vehicle.dailyRate}</div>
+                </div>
+                <a
+                  href={`/fleet/book/${vehicle.id}`}
+                  class="block w-full bg-blue-600 text-white text-center py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+                >
+                  Book Now
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>

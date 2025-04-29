@@ -1,11 +1,150 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import FAQ from '../components/FAQ.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Tomobil Car Hire - Premium Car Rental Services">
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white py-32">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl">
+          <h1 class="text-5xl font-bold mb-6">Your Journey Begins with the Perfect Car</h1>
+          <p class="text-xl mb-8">Experience premium car rental services with Tomobil. We offer a wide range of vehicles to suit your every need.</p>
+          <a href="/services" class="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            Explore Our Fleet
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Why Choose Tomobil</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="text-blue-600 text-4xl mb-4">🚗</div>
+            <h3 class="text-xl font-bold mb-2">Premium Fleet</h3>
+            <p class="text-gray-600">Choose from our wide selection of well-maintained, latest model vehicles.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="text-blue-600 text-4xl mb-4">💰</div>
+            <h3 class="text-xl font-bold mb-2">Best Rates</h3>
+            <p class="text-gray-600">Competitive pricing with no hidden fees. Get the best value for your money.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="text-blue-600 text-4xl mb-4">🎯</div>
+            <h3 class="text-xl font-bold mb-2">Flexible Rentals</h3>
+            <p class="text-gray-600">Daily, weekly, or monthly rentals with convenient pickup and drop-off locations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section class="py-20">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-3xl font-bold mb-6">Why Trust Us with Your Journey</h2>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <span class="text-blue-600 mr-3">✓</span>
+                <div>
+                  <h3 class="font-semibold mb-1">24/7 Customer Support</h3>
+                  <p class="text-gray-600">Our team is always ready to assist you whenever you need help.</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <span class="text-blue-600 mr-3">✓</span>
+                <div>
+                  <h3 class="font-semibold mb-1">Transparent Pricing</h3>
+                  <p class="text-gray-600">No hidden fees or surprises. Know exactly what you're paying for.</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <span class="text-blue-600 mr-3">✓</span>
+                <div>
+                  <h3 class="font-semibold mb-1">Clean & Maintained Vehicles</h3>
+                  <p class="text-gray-600">Regular maintenance and cleaning for your safety and comfort.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-100 p-8 rounded-lg">
+            <h3 class="text-2xl font-bold mb-6">Quick Stats</h3>
+            <div class="grid grid-cols-2 gap-6">
+              <div>
+                <div class="text-3xl font-bold text-blue-600 mb-2">1000+</div>
+                <p class="text-gray-600">Happy Customers</p>
+              </div>
+              <div>
+                <div class="text-3xl font-bold text-blue-600 mb-2">100+</div>
+                <p class="text-gray-600">Premium Vehicles</p>
+              </div>
+              <div>
+                <div class="text-3xl font-bold text-blue-600 mb-2">24/7</div>
+                <p class="text-gray-600">Customer Support</p>
+              </div>
+              <div>
+                <div class="text-3xl font-bold text-blue-600 mb-2">99%</div>
+                <p class="text-gray-600">Satisfaction Rate</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <FAQ />
+
+    <!-- Blog Preview Section -->
+    <section class="py-20">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold mb-4">Latest from Our Blog</h2>
+          <p class="text-gray-600">Stay updated with car rental tips and industry insights</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-6">
+              <div class="text-sm text-gray-500 mb-2">April 15, 2025</div>
+              <h3 class="text-xl font-bold mb-3">
+                <a href="/blog/essential-tips-first-time-car-renters" class="text-gray-900 hover:text-blue-600">
+                  Essential Tips for First-Time Car Renters
+                </a>
+              </h3>
+              <p class="text-gray-600 mb-4">Everything you need to know before renting your first car, from documentation to insurance.</p>
+              <a href="/blog/essential-tips-first-time-car-renters" class="text-blue-600 hover:text-blue-800 font-semibold">Read More →</a>
+            </div>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-6">
+              <div class="text-sm text-gray-500 mb-2">April 10, 2025</div>
+              <h3 class="text-xl font-bold mb-3">
+                <a href="/blog/choose-perfect-rental-car" class="text-gray-900 hover:text-blue-600">
+                  How to Choose the Perfect Rental Car
+                </a>
+              </h3>
+              <p class="text-gray-600 mb-4">A comprehensive guide to selecting the right vehicle based on your travel needs.</p>
+              <a href="/blog/choose-perfect-rental-car" class="text-blue-600 hover:text-blue-800 font-semibold">Read More →</a>
+            </div>
+          </article>
+          <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-6">
+              <div class="text-sm text-gray-500 mb-2">April 5, 2025</div>
+              <h3 class="text-xl font-bold mb-3">
+                <a href="/blog/understanding-car-rental-insurance" class="text-gray-900 hover:text-blue-600">
+                  Understanding Car Rental Insurance
+                </a>
+              </h3>
+              <p class="text-gray-600 mb-4">A detailed breakdown of different insurance coverage options available for rental cars.</p>
+              <a href="/blog/understanding-car-rental-insurance" class="text-blue-600 hover:text-blue-800 font-semibold">Read More →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>

@@ -1,0 +1,123 @@
+---
+const faqs = [
+  {
+    question: "What documents do I need to rent a car?",
+    answer: "You'll need a valid driver's license, credit card, and proof of insurance. Additional documentation may be required for international rentals."
+  },
+  {
+    question: "Do you offer insurance coverage?",
+    answer: "Yes, we offer various insurance options including collision damage waiver, liability coverage, and personal accident insurance."
+  },
+  {
+    question: "What is your fuel policy?",
+    answer: "Our vehicles are provided with a full tank of fuel and should be returned with a full tank. Alternative fuel policies are available upon request."
+  },
+  {
+    question: "Can I modify or cancel my reservation?",
+    answer: "Yes, you can modify or cancel your reservation up to 24 hours before the pickup time without any charges."
+  }
+];
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+    <div class="max-w-3xl mx-auto space-y-4">
+      {faqs.map((faq, index) => (
+        <div class="faq-item bg-white rounded-lg shadow-lg overflow-hidden">
+          <button
+            class="faq-button w-full p-6 text-left font-semibold flex justify-between items-center"
+            aria-expanded="false"
+            aria-controls={`faq-answer-${index}`}
+          >
+            <span>{faq.question}</span>
+            <svg
+              class="faq-icon w-6 h-6 transform transition-transform duration-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+          <div
+            id={`faq-answer-${index}`}
+            class="faq-answer overflow-hidden max-h-0 transition-all duration-300 ease-in-out"
+          >
+            <p class="p-6 text-gray-600 border-t">{faq.answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-item.active .faq-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-button:hover {
+    @apply text-blue-600;
+  }
+</style>
+
+<script>
+  function initFAQ() {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach((item) => {
+      const button = item.querySelector('.faq-button');
+      const answer = item.querySelector('.faq-answer');
+
+      if (button && answer) {
+        button.addEventListener('click', () => {
+          const isExpanded = button.getAttribute('aria-expanded') === 'true';
+          
+          // Close all other FAQs
+          faqItems.forEach((otherItem) => {
+            if (otherItem !== item) {
+              const otherButton = otherItem.querySelector('.faq-button');
+              const otherAnswer = otherItem.querySelector('.faq-answer');
+              otherItem.classList.remove('active');
+              otherButton?.setAttribute('aria-expanded', 'false');
+              if (otherAnswer) {
+                (otherAnswer as HTMLElement).style.maxHeight = '0';
+              }
+            }
+          });
+
+          // Toggle current FAQ
+          item.classList.toggle('active');
+          button.setAttribute('aria-expanded', (!isExpanded).toString());
+          
+          if (!isExpanded) {
+            (answer as HTMLElement).style.maxHeight = answer.scrollHeight + 'px';
+          } else {
+            (answer as HTMLElement).style.maxHeight = '0';
+          }
+        });
+      }
+    });
+
+    // Open first FAQ by default
+    const firstButton = faqItems[0]?.querySelector('.faq-button');
+    const firstAnswer = faqItems[0]?.querySelector('.faq-answer');
+    if (firstButton && firstAnswer) {
+      faqItems[0].classList.add('active');
+      firstButton.setAttribute('aria-expanded', 'true');
+      (firstAnswer as HTMLElement).style.maxHeight = firstAnswer.scrollHeight + 'px';
+    }
+  }
+
+  // Initialize FAQ when the DOM is loaded
+  document.addEventListener('DOMContentLoaded', initFAQ);
+
+  // Re-initialize when Astro view transitions are complete
+  document.addEventListener('astro:page-load', initFAQ);
+</script>

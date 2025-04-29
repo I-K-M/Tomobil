@@ -1,0 +1,194 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact Us | Tomobil Car Hire">
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
+      <div class="container mx-auto px-4">
+        <h1 class="text-5xl font-bold mb-6">Contact Us</h1>
+        <p class="text-xl max-w-2xl">Get in touch with our team for any inquiries or support.</p>
+      </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-12">
+          <!-- Contact Information -->
+          <div>
+            <h2 class="text-3xl font-bold mb-6">Get In Touch</h2>
+            <div class="space-y-6">
+              <div>
+                <h3 class="text-lg font-semibold mb-2">Our Office</h3>
+                <p class="text-gray-600">123 Car Street</p>
+                <p class="text-gray-600">City, Country 12345</p>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold mb-2">Contact Info</h3>
+                <p class="text-gray-600">Phone: +1 234 567 890</p>
+                <p class="text-gray-600">Email: info@tomobil.com</p>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold mb-2">Business Hours</h3>
+                <p class="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                <p class="text-gray-600">Saturday: 10:00 AM - 4:00 PM</p>
+                <p class="text-gray-600">Sunday: Closed</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold mb-6">Send us a Message</h2>
+            <form id="contact-form" class="space-y-6" novalidate>
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  required
+                  minlength="2"
+                  maxlength="50"
+                />
+                <span class="error-message text-red-500 text-sm mt-1 hidden"></span>
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  required
+                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                />
+                <span class="error-message text-red-500 text-sm mt-1 hidden"></span>
+              </div>
+              <div>
+                <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  required
+                  minlength="3"
+                  maxlength="100"
+                />
+                <span class="error-message text-red-500 text-sm mt-1 hidden"></span>
+              </div>
+              <div>
+                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  required
+                  minlength="10"
+                  maxlength="1000"
+                ></textarea>
+                <span class="error-message text-red-500 text-sm mt-1 hidden"></span>
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+              >
+                Send Message
+              </button>
+            </form>
+            <div id="form-message" class="mt-4 text-center hidden">
+              <p class="text-green-600 font-medium"></p>
+            </div>
+
+            <script>
+              const form = document.getElementById('contact-form') as HTMLFormElement;
+              const formMessage = document.getElementById('form-message');
+              const messageText = formMessage?.querySelector('p');
+              const inputFields = form?.querySelectorAll('input, textarea');
+
+              // Clear error messages when user starts typing
+              inputFields?.forEach(field => {
+                field.addEventListener('input', () => {
+                  const errorSpan = field.parentElement?.querySelector('.error-message');
+                  if (errorSpan) {
+                    errorSpan.textContent = '';
+                    errorSpan.classList.add('hidden');
+                  }
+                });
+              });
+
+              form?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Clear previous error messages
+                document.querySelectorAll('.error-message').forEach(el => {
+                  el.textContent = '';
+                  el.classList.add('hidden');
+                });
+                
+                // Disable submit button and show loading state
+                const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+                if (submitButton) {
+                  submitButton.disabled = true;
+                  submitButton.textContent = 'Sending...';
+                }
+
+                try {
+                  const formData = new FormData(form);
+                  const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    body: formData,
+                  });
+
+                  const result = await response.json();
+                  
+                  if (response.ok && result.success) {
+                    // Show success message
+                    if (messageText && formMessage) {
+                      messageText.textContent = result.message;
+                      messageText.className = 'text-green-600 font-medium';
+                      formMessage.classList.remove('hidden');
+                    }
+                    // Reset form
+                    form.reset();
+                  } else if (result.errors) {
+                    // Show validation errors
+                    result.errors.forEach((error: { field: string; message: string }) => {
+                      const field = form.querySelector(`[name="${error.field}"]`);
+                      const errorSpan = field?.parentElement?.querySelector('.error-message');
+                      if (errorSpan) {
+                        errorSpan.textContent = error.message;
+                        errorSpan.classList.remove('hidden');
+                      }
+                    });
+                  } else {
+                    throw new Error(result.message);
+                  }
+                } catch (error: unknown) {
+                  // Show error message
+                  if (messageText && formMessage) {
+                    const errorMessage = error instanceof Error ? error.message : 'There was an error sending your message. Please try again.';
+                    messageText.textContent = errorMessage;
+                    messageText.className = 'text-red-600 font-medium';
+                    formMessage.classList.remove('hidden');
+                  }
+                } finally {
+                  // Re-enable submit button
+                  if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Send Message';
+                  }
+                }
+              });
+            </script>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

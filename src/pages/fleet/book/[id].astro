@@ -1,0 +1,162 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const { id } = Astro.params;
+
+// In a real application, this would come from a database
+const vehicle = {
+  id: 1,
+  name: 'Mercedes-Benz E-Class',
+  category: 'Luxury Sedan',
+  passengers: 5,
+  transmission: 'Automatic',
+  fuelType: 'Hybrid',
+  dailyRate: 150,
+  image: '/images/mercedes-e-class.jpg',
+  features: ['Leather Seats', 'GPS Navigation', 'Bluetooth', 'Parking Sensors'],
+  specifications: {
+    engine: '2.0L Turbocharged',
+    power: '255 hp',
+    acceleration: '0-60 mph in 6.1 seconds',
+    fuelEconomy: '25 city / 34 highway',
+  }
+};
+---
+
+<Layout title={`Book ${vehicle.name} - Tomobil Car Hire`}>
+  <main class="min-h-screen py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Vehicle Details -->
+        <div>
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="aspect-w-16 aspect-h-9">
+              <img
+                src={vehicle.image}
+                alt={vehicle.name}
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <h1 class="text-3xl font-bold mb-4">{vehicle.name}</h1>
+              <p class="text-gray-600 mb-6">{vehicle.category}</p>
+              
+              <div class="grid grid-cols-2 gap-4 mb-6">
+                <div class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                  </svg>
+                  <span>{vehicle.passengers} Passengers</span>
+                </div>
+                <div class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+                  </svg>
+                  <span>{vehicle.transmission}</span>
+                </div>
+              </div>
+
+              <h2 class="text-xl font-bold mb-4">Specifications</h2>
+              <div class="grid grid-cols-1 gap-4 mb-6">
+                {Object.entries(vehicle.specifications).map(([key, value]) => (
+                  <div class="flex justify-between">
+                    <span class="text-gray-600 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
+                    <span class="font-medium">{value}</span>
+                  </div>
+                ))}
+              </div>
+
+              <h2 class="text-xl font-bold mb-4">Features</h2>
+              <ul class="grid grid-cols-2 gap-2 mb-6">
+                {vehicle.features.map(feature => (
+                  <li class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Booking Form -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <h2 class="text-2xl font-bold mb-6">Book Your Vehicle</h2>
+          <form class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Pick-up Date</label>
+                <input
+                  type="date"
+                  name="pickup_date"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Return Date</label>
+                <input
+                  type="date"
+                  name="return_date"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Pick-up Time</label>
+                <input
+                  type="time"
+                  name="pickup_time"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Return Time</label>
+                <input
+                  type="time"
+                  name="return_time"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Pick-up Location</label>
+              <select
+                name="pickup_location"
+                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                required
+              >
+                <option value="">Select a location</option>
+                <option value="london">London Office</option>
+                <option value="manchester">Manchester Office</option>
+                <option value="birmingham">Birmingham Office</option>
+                <option value="glasgow">Glasgow Office</option>
+              </select>
+            </div>
+
+            <div class="border-t pt-6">
+              <div class="flex justify-between items-center mb-4">
+                <div class="text-gray-600">Daily Rate</div>
+                <div class="text-2xl font-bold">£{vehicle.dailyRate}</div>
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors"
+              >
+                Proceed to Payment
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

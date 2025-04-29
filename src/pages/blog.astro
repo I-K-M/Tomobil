@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+const posts = [
+  {
+    title: "Essential Tips for First-Time Car Renters",
+    date: "2025-04-15",
+    excerpt: "Everything you need to know before renting your first car, from documentation to insurance.",
+    slug: "essential-tips-first-time-car-renters"
+  },
+  {
+    title: "How to Choose the Perfect Rental Car for Your Trip",
+    date: "2025-04-10",
+    excerpt: "A comprehensive guide to selecting the right vehicle based on your travel needs and preferences.",
+    slug: "choose-perfect-rental-car"
+  },
+  {
+    title: "Understanding Car Rental Insurance Options",
+    date: "2025-04-05",
+    excerpt: "A detailed breakdown of different insurance coverage options available for rental cars.",
+    slug: "understanding-car-rental-insurance"
+  }
+];
+---
+
+<Layout title="Blog | Tomobil Car Hire">
+  <main class="min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
+      <div class="container mx-auto px-4">
+        <h1 class="text-5xl font-bold mb-6">Our Blog</h1>
+        <p class="text-xl max-w-2xl">Stay updated with the latest news and tips about car rental.</p>
+      </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-3 gap-8">
+          {posts.map((post) => (
+            <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div class="p-6">
+                <div class="text-sm text-gray-500 mb-2">{post.date}</div>
+                <h2 class="text-xl font-bold mb-3">
+                  <a href={`/blog/${post.slug}`} class="text-gray-900 hover:text-blue-600">
+                    {post.title}
+                  </a>
+                </h2>
+                <p class="text-gray-600 mb-4">{post.excerpt}</p>
+                <a
+                  href={`/blog/${post.slug}`}
+                  class="inline-block text-blue-600 hover:text-blue-800 font-semibold"
+                >
+                  Read More →
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
