@@ -1,48 +1,92 @@
-# Astro Starter Kit: Basics
+# Tomobil - Fleet Management System
 
-```sh
-npm create astro@latest -- --template basics
+## Overview
+Tomobil is a modern fleet management website built with Astro and TailwindCSS. It provides a comprehensive solution for managing vehicle fleets, handling bookings, and maintaining vehicles.
+
+## Features
+
+### Fleet Management
+- **Vehicle Catalog**: Browse and filter available vehicles
+- **Detailed Vehicle Pages**: Complete specifications and features for each vehicle
+- **Maintenance Tracking**: Schedule and monitor vehicle maintenance
+- **Booking System**: User-friendly booking interface with date and location selection
+
+### Key Components
+
+1. **Vehicle Management**
+   - Vehicle listing with filters
+   - Detailed vehicle information
+   - Status tracking
+   - Maintenance scheduling
+
+2. **Booking System**
+   - Date and time selection
+   - Location picker
+   - Real-time availability
+   - Instant pricing
+
+3. **Contact System**
+   - Form validation
+   - Server-side processing
+   - Error handling
+   - User feedback
+
+## Technology Stack
+
+- **Framework**: [Astro](https://astro.build)
+- **Styling**: [TailwindCSS](https://tailwindcss.com)
+- **Validation**: Custom TypeScript validation
+- **Animations**: Custom JavaScript animations
+
+## Getting Started
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/I-K-M/Tomobil.git
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Build for production:
+   ```bash
+   npm run build
+   ```
+
+## Project Structure
+
+```
+src/
+├── components/    # Reusable components
+├── layouts/       # Page layouts
+├── pages/         # Route pages
+│   ├── api/       # API endpoints
+│   ├── fleet/     # Fleet management pages
+│   └── blog/      # Blog posts
+├── styles/        # Global styles
+└── utils/         # Utility functions
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## Contributing
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## License
 
-## 🚀 Project Structure
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Contact
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Project Link: [https://github.com/I-K-M/Tomobil](https://github.com/I-K-M/Tomobil)
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
